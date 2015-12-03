@@ -10,6 +10,8 @@
 
     <!-- Bootstrap -->
     <link href="{% static 'affiliate/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'affiliate/css/style.css' %}" rel="stylesheet">
+    <link href="{% static 'affiliate/css/toolkit-inverse.css' %}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -17,26 +19,59 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script type="text/html" id="home-template">
+      <h1>Welcome to Affiliate</h1>
+    </script>
+
+    <script type="text/html" id="login-template">
+      <div class="container">
+        <form action="" method="post" role="form">
+          <legend>Login</legend>
+          <div class="form-group">
+            <label for="id-username">Username</label>
+            <input type="text" class="form-control" id="id-username" required />
+          </div>
+          <div class="form-group">
+            <label for="id-password">Password</label>
+            <input type="password" class="form-control" id="id-password" required />
+          </div>
+          <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+      </div>
+    </script>
+
+    <script type="text/html" id="header-template">
+      <span class="title">Your Information</span>
+      <% if (authenticated ) { %>
+        <nav>
+          <a href="/" class="button">Your Customers</a>
+          <a href="#" class="logout button">Logout</a>
+        </nav>
+      <% } %>
+    </script>
   </head>
 
   <body>
-    <h1>Hello, world!</h1>
+    <div id="content"></div>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{% static 'affiliate/vendor/jquery.js' %}"></script>
+    <script src="{% static 'affiliate/vendor/jquery-2.1.4.min.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static 'affiliate/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'affiliate/vendor/bootstrap.min.js' %}"></script>
     <!-- Backbone -->
-    <script src="{% static 'affiliate/vendor/underscore.js' %}"></script>
-    <script src="{% static 'affiliate/vendor/backbone.js' %}"></script>
+    <script src="{% static 'affiliate/vendor/underscore-min.js' %}"></script>
+    <script src="{% static 'affiliate/vendor/backbone-min.js' %}"></script>
     <script id="config" type="text/json">
     {
       "models": {},
       "collections": {},
       "views": {},
-      "router": null
+      "router": null,
+      "apiRoot": "{% url 'api-root' %}",
+      "apiLogin": "{% url 'api-token' %}"
     }
     </script>
+    <script src="{% static 'affiliate/js/app.js' %}"></script>
     <script src="{% static 'affiliate/js/models.js' %}"></script>
     <script src="{% static 'affiliate/js/views.js' %}"></script>
     <script src="{% static 'affiliate/js/router.js' %}"></script>
