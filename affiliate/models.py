@@ -26,12 +26,17 @@ class Customer(models.Model):
 
 @python_2_unicode_compatible
 class CustomerStat(models.Model):
+  date      = models.DateField()
   username  = models.CharField(max_length=15)
   stake     = models.DecimalField(max_digits=11, decimal_places=2)
   winloss   = models.DecimalField(max_digits=11, decimal_places=2)
   comm      = models.DecimalField(max_digits=11, decimal_places=2)
   total     = models.DecimalField(max_digits=11, decimal_places=2)
   created   = models.DateTimeField(auto_now_add=True)
+  updated   = models.DateTimeField(auto_now=True)
+
+  class Meta:
+    unique_together = ('date', 'username')
 
   def __str__(self):
-    return '%s (%s)' % (self.user_id, self.created)
+    return '%s (%s)' % (self.username, self.created)
