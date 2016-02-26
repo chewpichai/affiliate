@@ -75,4 +75,43 @@
   
   app.session = new Session();
 
+  var BaseModel = Backbone.Model.extend({
+    url: function() {
+      var links = this.get('links'),
+          url = links && links.self;
+      if (!url) {
+        url = Backbone.Model.prototype.url.call(this);
+      }
+      return url;
+    }
+  });
+
+  app.models.User = BaseModel.extend({
+    idAttributemodel: 'username'
+  });
+  app.models.CommissionDetail = BaseModel.extend({});
+
+  var BaseCollection = Backbone.Collection.extend({
+    parse: function(response) {
+      this._next = response.next;
+      this._previous = response.previous;
+      this._count = response.count;
+      return response.results || [];
+    }
+  });
+
+  app.collections.ready = $.getJSON(app.apiRoot);
+  app.collections.ready.done(function(data) {
+    app.collections.Users = BaseCollection.extend({
+      model: app.models.User,
+      url: data.users
+    });
+    app.users = new app.collections.Users();
+
+    app.collections.CommissionDetails = BaseCollection.extend({
+      model: app.models.CommissionDetail,
+      url: data['commission-details']
+    });
+    app.customers = new app.collections.CommissionDetails();
+  });
 })(jQuery, Backbone, _, app);

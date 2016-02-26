@@ -1,4 +1,4 @@
-{% load staticfiles %}
+{% load staticfiles affiliate %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,8 +10,7 @@
 
     <!-- Bootstrap -->
     <link href="{% static 'affiliate/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="{% static 'affiliate/css/style.css' %}" rel="stylesheet">
-    <link href="{% static 'affiliate/css/toolkit-inverse.css' %}" rel="stylesheet">
+    <link href="{% static 'affiliate/css/affiliate.css' %}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -20,34 +19,149 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script type="text/html" id="home-template">
-      <h1>Welcome to Affiliate</h1>
+      <div class="container">
+        <h1>Welcome to Affiliate</h1>
+        <% if (me !== null) { %>
+          <p id="user-shareable-link"><%- me.shareable_link %></p>
+        <% } else { %>
+          <div class="loading">Loading...</div>
+        <% } %>
+      </div>
+    </script>
+
+    <script type="text/html" id="customer-list-template">
+      <div class="container">
+        <h1>Your Customers</h1>
+        <p id="user-shareable-link"></p>
+        <% if (customers !== null) { %>
+          <div class="customer-controls">
+            <form action="" method="POST" class="form-inline" role="form">
+              <div class="form-group">
+                <label class="sr-only" for="">Start Date</label>
+                <input type="date" class="form-control input-sm" id="" placeholder="Start Date">
+              </div>
+              <div class="form-group">
+                <label class="sr-only" for="">End Date</label>
+                <input type="date" class="form-control input-sm" id="" placeholder="End Date">
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">Search</button>
+            </form>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-bordered table-hover table-customer">
+              <thead>
+                <tr>
+                  <th>UserID</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% _.each(customers.models, function(customer) { %>
+                <tr>
+                  <td><%- customer.get('username') %></td>
+                  <td></td>
+                </tr>
+              <% }); %>
+              </tbody>
+            </table>
+          </div>
+          <% } else { %>
+            <div class="loading">Loading...</div>
+          <% } %>
+      </div>
     </script>
 
     <script type="text/html" id="login-template">
-      <div class="container">
-        <form action="" method="post" role="form">
-          <legend>Login</legend>
-          <div class="form-group">
-            <label for="id-username">Username</label>
-            <input type="text" class="form-control" id="id-username" required />
+      <div class="container container-login">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li role="presentation" class="active"><a href="#tab-register" aria-controls="register" role="tab" data-toggle="tab">Register</a></li>
+          <li role="presentation"><a href="#tab-login" aria-controls="login" role="tab" data-toggle="tab">Login</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="tab-register">
+            
           </div>
-          <div class="form-group">
-            <label for="id-password">Password</label>
-            <input type="password" class="form-control" id="id-password" required />
+          <div role="tabpanel" class="tab-pane" id="tab-login">
+            <form class="form-login" method="POST" role="form">
+              <legend>Login</legend>
+              <div class="form-group">
+                <label for="id-username">Username</label>
+                <input type="text" class="form-control" id="id-username" name="username" required />
+              </div>
+              <div class="form-group">
+                <label for="id-password">Password</label>
+                <input type="password" class="form-control" id="id-password" name="password" required />
+              </div>
+              <button type="submit" class="btn btn-primary">Login</button>
+            </form>
           </div>
-          <button type="submit" class="btn btn-primary">Login</button>
-        </form>
+        </div>
       </div>
     </script>
 
     <script type="text/html" id="header-template">
-      <span class="title">Your Information</span>
-      <% if (authenticated ) { %>
-        <nav>
-          <a href="/" class="button">Your Customers</a>
-          <a href="#" class="logout button">Logout</a>
-        </nav>
-      <% } %>
+      <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Affiliate FIFA55</a>
+          </div>
+      
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav navbar-right">
+            <% if (authenticated) { %>
+              <li><a href="#customers">Your Customers</a></li>
+              <li><a href="#logout" class="logout">Logout</a></li>
+            <% } %>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div>
+      </nav>
+    </script>
+
+    <script type="text/html" id="new-user-template">
+      <form class="form-new-user" method="POST" role="form">
+        <legend>Register</legend>
+        <div class="form-group">
+          <label for="id-username">Username</label>
+          <input type="text" class="form-control" id="id-username" name="username" placeholder="Username">
+        </div>
+        <div class="form-group">
+          <label for="id-password">Password</label>
+          <input type="password" class="form-control" id="id-password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+          <label for="id-bank">Bank</label>
+          <input type="text" class="form-control" id="id-bank" name="bank" placeholder="Bank">
+        </div>
+        <div class="form-group">
+          <label for="id-bankacc">Bank Account</label>
+          <input type="text" class="form-control" maxlength="10" id="id-bankacc" name="bank_account_no" placeholder="Bank Account">
+        </div>
+        <div class="form-group">
+          <label for="id-lineid">Line ID</label>
+          <input type="text" class="form-control" id="id-lineid" name="line_id" placeholder="Line ID">
+        </div>
+        <div class="form-group">
+          <label for="id-phoneno">Phone No.</label>
+          <input type="tel" class="form-control" id="id-phoneno" name="phone_no" placeholder="Phone No.">
+        </div>
+        <div class="form-group">
+          <label for="id-phoneno">Captcha</label>
+          {% get_captcha_field %}
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
     </script>
   </head>
 
@@ -68,7 +182,8 @@
       "views": {},
       "router": null,
       "apiRoot": "{% url 'api-root' %}",
-      "apiLogin": "{% url 'api-token' %}"
+      "apiLogin": "{% url 'api-token' %}",
+      "apiMe": "{% url 'user-me' %}"
     }
     </script>
     <script src="{% static 'affiliate/js/app.js' %}"></script>

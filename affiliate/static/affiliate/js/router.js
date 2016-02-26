@@ -1,7 +1,8 @@
 (function($, Backbone, _, app) {
   var AppRouter = Backbone.Router.extend({
     routes: {
-      '': 'home'
+      '': 'home',
+      'customers': 'listCustomer'
     },
     initialize: function(options) {
       this.contentElement = '#content';
@@ -13,6 +14,10 @@
     },
     home: function() {
       var view = new app.views.HomepageView({el: this.contentElement});
+      this.render(view);
+    },
+    listCustomer: function() {
+      var view = new app.views.CustomerListView({el: this.contentElement});
       this.render(view);
     },
     route: function(route, name, callback) {

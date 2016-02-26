@@ -10,6 +10,8 @@ import django.core.validators
 
 class Migration(migrations.Migration):
 
+    replaces = [(b'affiliate', '0001_initial'), (b'affiliate', '0002_auto_20160221_1446'), (b'affiliate', '0003_user_bank'), (b'affiliate', '0004_user_refid')]
+
     dependencies = [
         ('auth', '0006_require_contenttypes_0002'),
     ]
@@ -32,8 +34,8 @@ class Migration(migrations.Migration):
                 ('bank_account_no', models.CharField(max_length=15)),
                 ('line_id', models.CharField(max_length=255)),
                 ('phone_no', models.CharField(max_length=15)),
-                ('groups', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Group', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', verbose_name='groups')),
-                ('user_permissions', models.ManyToManyField(related_query_name='user', related_name='user_set', to='auth.Permission', blank=True, help_text='Specific permissions for this user.', verbose_name='user permissions')),
+                ('groups', models.ManyToManyField(related_query_name='user', related_name='user_set', to=b'auth.Group', blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', verbose_name='groups')),
+                ('user_permissions', models.ManyToManyField(related_query_name='user', related_name='user_set', to=b'auth.Permission', blank=True, help_text='Specific permissions for this user.', verbose_name='user permissions')),
             ],
             options={
                 'abstract': False,
@@ -48,13 +50,13 @@ class Migration(migrations.Migration):
             name='Customer',
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
-                ('name', models.CharField(max_length=255)),
-                ('line_id', models.CharField(max_length=255)),
-                ('phone_no', models.CharField(max_length=15)),
-                ('username', models.CharField(max_length=15, null=True, blank=True)),
-                ('source', models.CharField(max_length=2000)),
-                ('website', models.URLField()),
-                ('registered', models.DateTimeField(auto_now_add=True)),
+                ('name', models.CharField(max_length=255, null=True)),
+                ('line_id', models.CharField(max_length=255, null=True)),
+                ('phone_no', models.CharField(max_length=15, null=True)),
+                ('username', models.CharField(max_length=15)),
+                ('source', models.CharField(max_length=2000, null=True)),
+                ('website', models.URLField(null=True)),
+                ('registered', models.DateTimeField(null=True)),
                 ('user', models.ForeignKey(related_name='customers', to=settings.AUTH_USER_MODEL)),
             ],
         ),
@@ -75,5 +77,17 @@ class Migration(migrations.Migration):
         migrations.AlterUniqueTogether(
             name='customerstat',
             unique_together=set([('date', 'username')]),
+        ),
+        migrations.AddField(
+            model_name='user',
+            name='bank',
+            field=models.CharField(max_length=15, choices=[(b'bbl', b'Bangkok Bank'), (b'kbank', b'Kasikorn Bank'), (b'ktb', b'Krung Thai Bank'), (b'scb', b'Siam Commercial Bank')]),
+            preserve_default=False,
+        ),
+        migrations.AddField(
+            model_name='user',
+            name='refid',
+            field=models.CharField(unique=True, max_length=15),
+            preserve_default=False,
         ),
     ]

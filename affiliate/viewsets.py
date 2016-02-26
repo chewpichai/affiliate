@@ -1,8 +1,12 @@
 from django.contrib.auth import get_user_model
 from rest_framework import authentication, permissions, viewsets, filters
-from .filters import *
-from .models import *
-from .serializers import *
+from rest_framework.decorators import api_view, permission_classes, authentication_classes, list_route
+from rest_framework.exceptions import ValidationError
+from rest_framework.response import Response
+from affiliate.filters import *
+from affiliate.models import *
+from affiliate.serializers import *
+from captcha import fields
 
 
 User = get_user_model()
@@ -19,9 +23,6 @@ class DefaultsMixin(object):
   permission_classes = (
     permissions.IsAuthenticated,
   )
-  paginate_by = 25
-  paginate_by_param = 'page_size'
-  max_paginate_by = 100
   filter_backends = (
     filters.DjangoFilterBackend,
     filters.SearchFilter,
@@ -35,17 +36,27 @@ class UserViewSet(DefaultsMixin, viewsets.ModelViewSet):
   queryset = User.objects.order_by(User.USERNAME_FIELD)
   serializer_class = UserSerializer
   search_fields = (User.USERNAME_FIELD,)
+  authentication_classes = ()
+  permission_classes = ()
+
+  def create(self, request):
+    data = request.data
+    field = fields.CaptchaField()
+    try:
+      field.clean([data['captcha_0'], data['captcha']])
+    except fields.ValidationError:
+      raise ValidationError({'captcha': 'Wrong captcha.'})
+    return super(UserViewSet, self).create(request)
+
+  @list_route(methods=['get'], permission_classes=[permissions.IsAuthenticated],
+    authentication_classes=[authentication.TokenAuthentication], url_path='me')
+  def get_me(self, request):
+    serializer = self.get_serializer(instance=request.user)
+    return Response(serializer.data)
 
 
-class CustomerViewSet(DefaultsMixin, viewsets.ModelViewSet):
-  queryset = Customer.objects.all()
-  serializer_class = CustomerSerializer
-  filter_class = CustomerFilter
-  search_fields = ('user', 'website')
-
-
-class CustomerStatViewSet(DefaultsMixin, viewsets.ModelViewSet):
-  queryset = CustomerStat.objects.all()
-  serializer_class = CustomerStatSerializer
-  filter_class = CustomerStatFilter
+class CommissionDetailViewSet(DefaultsMixin, viewsets.ModelViewSet):
+  queryset = CommissionDetail.objects.all()
+  serializer_class = CommissionDetailSerializer
+  filter_class = CommissionDetailFilter
   search_fields = ('username',)

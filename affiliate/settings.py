@@ -22,8 +22,6 @@ SECRET_KEY = 'aw5o=op#myqi##ma0brwv9ulo$e&bb!1i-j1_e)6*k36c2wjll'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
 
@@ -35,6 +33,7 @@ INSTALLED_APPS = (
   'django.contrib.staticfiles',
   'rest_framework',
   'rest_framework.authtoken',
+  'captcha',
   'affiliate',
 )
 
@@ -82,3 +81,27 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'affiliate.User'
+
+REST_FRAMEWORK = {
+  'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+  'PAGE_SIZE': 50
+}
+
+CAPTCHA_IMAGE_SIZE = (80, 26)
+
+CAPTCHA_FONT_SIZE = 20
+
+CAPTCHA_LETTER_ROTATION = None
+
+CAPTCHA_BACKGROUND_COLOR = '#eeeeee'
+
+CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'
+
+CAPTCHA_NOISE_FUNCTIONS = ()
+
+CAPTCHA_TEXT_FIELD_TEMPLATE = os.path.join(BASE_DIR, 'affiliate/templates/captcha/text_field.html')
+
+CAPTCHA_FIELD_TEMPLATE = os.path.join(BASE_DIR, 'affiliate/templates/captcha/field.html')
+
+import decimal
+AFFILIATE_PERCENT = decimal.Decimal('0.02')

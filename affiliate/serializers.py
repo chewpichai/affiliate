@@ -9,46 +9,37 @@ User = get_user_model()
 
 class UserSerializer(serializers.ModelSerializer):
   links = serializers.SerializerMethodField()
+  shareable_link = serializers.URLField(source='get_shareable_link', read_only=True)
 
   class Meta:
     model = User
+    extra_kwargs = {'password': {'write_only': True}}
+
+  def create(self, validated_data):
+    data = validated_data.copy()
+    data.pop('password')
+    user = User(**data)
+    user.set_password(validated_data['password'])
+    user.save()
+    return user
 
   def get_links(self, obj):
     request = self.context['request']
     username = obj.get_username()
     return {
       'self': reverse('user-detail', kwargs={User.USERNAME_FIELD: username}, request=request),
-      'customers': '{}?user={}'.format(reverse('customer-list', request=request), username)
+      'commission_details': '{}?user={}'.format(reverse('commissiondetail-list', request=request), username)
     }
 
 
-class CustomerSerializer(serializers.ModelSerializer):
-  user = serializers.SlugRelatedField(slug_field=User.USERNAME_FIELD, required=False, queryset=User.objects.all())
+class CommissionDetailSerializer(serializers.ModelSerializer):
   links = serializers.SerializerMethodField()
 
   class Meta:
-    model = Customer
-
-  def get_links(self, obj):
-    request = self.context['request']
-    links = {
-      'self': reverse('customer-detail', kwargs={'pk': obj.pk}, request=request),
-      'user': None
-    }
-    if obj.user:
-      links['assigned'] = reverse('user-detail', kwargs={User.USERNAME_FIELD: obj.user}, request=request)
-    return links
-
-
-
-class CustomerStatSerializer(serializers.ModelSerializer):
-  links = serializers.SerializerMethodField()
-
-  class Meta:
-    model = CustomerStat
+    model = CommissionDetail
 
   def get_links(self, obj):
     request = self.context['request']
     return {
-      'self': reverse('customerstat-detail', kwargs={'pk': obj.pk}, request=request),
+      'self': reverse('commissiondetail', kwargs={'pk': obj.pk}, request=request),
     }
