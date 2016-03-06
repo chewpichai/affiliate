@@ -2,7 +2,7 @@
   var AppRouter = Backbone.Router.extend({
     routes: {
       '': 'home',
-      'customers': 'listCustomer'
+      'commissions': 'listCommission'
     },
     initialize: function(options) {
       this.contentElement = '#content';
@@ -16,8 +16,8 @@
       var view = new app.views.HomepageView({el: this.contentElement});
       this.render(view);
     },
-    listCustomer: function() {
-      var view = new app.views.CustomerListView({el: this.contentElement});
+    listCommission: function() {
+      var view = new app.views.CommissionListView({el: this.contentElement});
       this.render(view);
     },
     route: function(route, name, callback) {

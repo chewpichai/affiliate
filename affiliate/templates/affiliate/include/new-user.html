@@ -1,0 +1,35 @@
+{% load affiliate i18n staticfiles %}
+<script type="text/html" id="new-user-template">
+  <form class="form-new-user" method="POST" role="form">
+    <legend>{% trans 'Register' %}</legend>
+    <div class="form-group">
+      <label for="id-username">{% trans 'Username' %}</label>
+      <input type="text" class="form-control" id="id-username" name="username">
+    </div>
+    <div class="form-group">
+      <label for="id-password">{% trans 'Password' %}</label>
+      <input type="password" class="form-control" id="id-password" name="password">
+    </div>
+    <div class="form-group">
+      <label for="id-bank">{% trans 'Bank' %}</label>
+      {% get_bank_field %}
+    </div>
+    <div class="form-group">
+      <label for="id-bankacc">{% trans 'Bank Account No.' %}</label>
+      <input type="tel" class="form-control" maxlength="10" id="id-bankacc" name="bank_account_no">
+    </div>
+    <div class="form-group">
+      <label for="id-lineid">Line ID</label>
+      <input type="text" class="form-control" id="id-lineid" name="line_id">
+    </div>
+    <div class="form-group">
+      <label for="id-phoneno">{% trans 'Phone No.' %}</label>
+      <input type="tel" class="form-control" id="id-phoneno" name="phone_no" maxlength="10">
+    </div>
+    <div class="form-group">
+      <label for="id-phoneno">{% trans 'Captcha' %}</label>
+      {% get_captcha_field %}
+    </div>
+    <button type="submit" class="btn btn-primary center-block">{% trans 'Register' %}</button>
+  </form>
+</script>

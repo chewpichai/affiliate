@@ -66,14 +66,20 @@
   var HomepageView = TemplateView.extend({
     templateName: '#home-template',
     initialize: function(options) {
+      this.on('rendered', this.rendered);
       var self = this;
       TemplateView.prototype.initialize.apply(this, arguments);
       $.get(app.apiMe, function(user) {
         app.me = user;
         $.proxy(self.render, self)();
+        var clipboard = new Clipboard('.btn-copy', {
+          text: function(trigger) {
+            return user.shareable_link;
+          }
+        }); 
       });
     },
-    getContext: function () {
+    getContext: function() {
       return {me: app.me || null};
     }
   });
@@ -153,19 +159,19 @@
     }
   });
 
-  var CustomerListView = TemplateView.extend({
-    templateName: '#customer-list-template',
+  var CommissionListView = TemplateView.extend({
+    templateName: '#commission-list-template',
     initialize: function(options) {
       var self = this;
       TemplateView.prototype.initialize.apply(this, arguments);
       app.collections.ready.done(function() {
-        app.customers.fetch({
+        app.commissionDetails.fetch({
           success: $.proxy(self.render, self)
         });
       });
     },
     getContext: function () {
-      return {customers: app.customers || null};
+      return {commissionDetails: app.commissionDetails || null};
     }
   });
 
@@ -173,6 +179,6 @@
   app.views.LoginView = LoginView;
   app.views.NewUserView = NewUserView;
   app.views.HeaderView = HeaderView;
-  app.views.CustomerListView = CustomerListView;
+  app.views.CommissionListView = CommissionListView;
 
 })(jQuery, Backbone, _, app)

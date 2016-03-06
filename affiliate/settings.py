@@ -84,7 +84,7 @@ AUTH_USER_MODEL = 'affiliate.User'
 
 REST_FRAMEWORK = {
   'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-  'PAGE_SIZE': 50
+  'PAGE_SIZE': 50,
 }
 
 CAPTCHA_IMAGE_SIZE = (80, 26)
@@ -104,4 +104,10 @@ CAPTCHA_TEXT_FIELD_TEMPLATE = os.path.join(BASE_DIR, 'affiliate/templates/captch
 CAPTCHA_FIELD_TEMPLATE = os.path.join(BASE_DIR, 'affiliate/templates/captcha/field.html')
 
 import decimal
-AFFILIATE_PERCENT = decimal.Decimal('0.02')
+import sys
+AFFILIATE_PERCENT = (
+  (1, 100000, decimal.Decimal('0.28')),
+  (100001, 1500000, decimal.Decimal('0.35')),
+  (1500001, 3200000, decimal.Decimal('0.40')),
+  (3200001, sys.maxint, decimal.Decimal('0.45')),
+)

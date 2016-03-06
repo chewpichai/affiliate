@@ -1,16 +1,88 @@
-.container-login .nav-tabs,
-.container-login .tab-content {
-  max-width: 350px;
-  margin-left: auto;
-  margin-right: auto;
+@font-face {
+  font-family: 'DB Helvethaica';
+  src: url('../fonts/db_helvethaica_x_bd_v3.2-webfont.eot');
+  src: url('../fonts/db_helvethaica_x_bd_v3.2-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/db_helvethaica_x_bd_v3.2-webfont.woff2') format('woff2'),
+       url('../fonts/db_helvethaica_x_bd_v3.2-webfont.woff') format('woff'),
+       url('../fonts/db_helvethaica_x_bd_v3.2-webfont.ttf') format('truetype'),
+       url('../fonts/db_helvethaica_x_bd_v3.2-webfont.svg#db_helvethaica_x76_bdit') format('svg');
+  font-weight: bold;
+  font-style: normal;
 }
 
-.container-login .tab-content {
-  padding: 15px;
+html {
+  
+}
+
+body {
+  background: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'DB Helvethaica';
+  font-weight: bold;
+}
+
+.blue {
+  color: #00f;
+}
+
+.red {
+  color: #f00;
 }
 
 .customer-controls {
   margin-bottom: 15px;
+}
+
+.form-new-user,
+.form-login {
+  background: #1f1f1f;
+  padding-bottom: 15px;
+  margin: 15px;
+  -webkit-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.8);
+     -moz-box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.8);
+          box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.8);
+}
+
+.form-new-user .form-group,
+.form-login .form-group {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.form-new-user label,
+.form-login label {
+  color: #fff;
+}
+
+.form-new-user legend,
+.form-login legend {
+  font-family: 'DB Helvethaica';
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  border: none;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  width: 100%;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#434343+0,101010+100 */
+  background: #434343; /* Old browsers */
+  background: -moz-linear-gradient(top,  #434343 0%, #101010 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top,  #434343 0%,#101010 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom,  #434343 0%,#101010 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#434343', endColorstr='#101010',GradientType=0 ); /* IE6-9 */
+}
+
+.form-new-user .btn-primary,
+.form-login .btn-primary {
+  color: #fff;
+  background: #f00;
+  border-color: #f00;
+  font-weight: bold;
+  padding-left: 30px;
+  padding-right: 30px;
 }
 
 .form-new-user .input-group-addon {
@@ -19,4 +91,71 @@
 
 .form-new-user .has-error .input-group-addon {
   background-color: #eee;
+}
+
+.table-commission th {
+  text-align: center;
+}
+
+.navbar-main {
+  background-color: #1c1c1c;
+  border: none;
+  border-radius: 0;
+}
+
+.navbar-main .navbar-brand {
+  height: 86px;
+}
+
+.tab-content {
+  padding: 15px;
+}
+
+.tab-content-register {
+  background-color: #323232;
+}
+
+.nav-tabs-register > li {
+  background-color: #555;
+}
+
+.nav-tabs-register > li > a {
+  background-color: #555;
+  border-color: #555;
+  color: #aaa;
+}
+
+.nav-tabs-register > li.active > a,
+.nav-tabs-register > li > a:hover,
+.nav-tabs-register > li.active > a:hover,
+.nav-tabs-register > li.active > a:focus {
+  background-color: #323232;
+  border-color: #323232;
+  color: #fff;
+  outline: none;
+}
+
+#user-shareable-link {
+  padding: 8px 15px;
+  background: #eee;
+  display: inline-block;
+}
+
+
+@media screen and (min-width: 768px) {
+  .navbar-main .navbar-right {
+    margin-top: 45px;
+  }
+
+  .navbar-main .navbar-right > li + li {
+    margin-left: 15px;
+  }
+
+  .navbar-main .navbar-right > li > a,
+  .navbar-main .navbar-right > li > a:hover,
+  .navbar-main .navbar-right > li > a:focus {
+    background: #fff;
+    padding: 4px 15px;
+    border-radius: 5px;
+  }
 }

@@ -1,0 +1,163 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-06 14:03+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: .\models.py:12
+msgid "Bangkok Bank"
+msgstr "ธนาคารกรุงเทพ"
+
+#: .\models.py:13
+msgid "Kasikorn Bank"
+msgstr "ธนาคารกสิกรไทย"
+
+#: .\models.py:14
+msgid "Krung Thai Bank"
+msgstr "ธนาคารกรุงไทย"
+
+#: .\models.py:15
+msgid "Siam Commercial Bank"
+msgstr "ธนาคารไทยพาณิชย์"
+
+#: .\models.py:16
+msgid "Krungsri Bank"
+msgstr "ธนาคารกรุงศรีอยุธยา"
+
+#: .\models.py:17
+msgid "Siam City Bank"
+msgstr "ธนาคารนครหลวงไทย"
+
+#: .\models.py:18
+msgid "UOB Bank"
+msgstr "ธนาคารยูโอบี"
+
+#: .\models.py:19
+msgid "TMB Bank"
+msgstr "ธนาคารทหารไทย"
+
+#: .\models.py:20
+msgid "TISCO Bank"
+msgstr "ธนาคารทิสโก้"
+
+#: .\models.py:21
+msgid "ICBC Bank"
+msgstr "ธนาคารไอซีบีซี (ไทย)"
+
+#: .\models.py:22
+msgid "Kiatnakin Bank"
+msgstr "ธนาคารเกียรตินาคิน"
+
+#: .\models.py:23
+msgid "Thanachart Bank"
+msgstr "ธนาคารธนชาต"
+
+#: .\models.py:24
+msgid "Standard Chartered Bank"
+msgstr "ธนาคารสแตนดาร์ดชาร์เตอร์ดไทย"
+
+#: .\models.py:25
+msgid "Government Housing Bank"
+msgstr "ธนาคารอาคารสงเคราะห์"
+
+#: .\models.py:26
+msgid "Land and Houses Bank"
+msgstr "ธนาคารแลนด์ แอนด์ เฮาส์"
+
+#: .\models.py:27
+msgid "Government Saving Bank"
+msgstr "ธนาคารออมสิน"
+
+#: .\models.py:28
+msgid "Bank for Agriculture and Agricultural Cooperatives"
+msgstr "ธนาคารเพื่อการเกษตรและสหกรณ์การเกษตร (ธกส)"
+
+#: .\models.py:29
+msgid "Islamic Bank of Thailand"
+msgstr "ธนาคารอิสลามแห่งประเทศไทย"
+
+#: .\templates\affiliate\include\commission-list.html:4
+#: .\templates\affiliate\include\header.html:20
+msgid "Your Commissions"
+msgstr "คอมมิชชั่นของคุณ"
+
+#: .\templates\affiliate\include\commission-list.html:11
+msgid "Date"
+msgstr "วันที่"
+
+#: .\templates\affiliate\include\commission-list.html:12
+msgid "Num Coustomers"
+msgstr "จำนวนลูกค้า"
+
+#: .\templates\affiliate\include\commission-list.html:13
+msgid "Commission"
+msgstr "ค่าคอม"
+
+#: .\templates\affiliate\include\commission-list.html:28
+#: .\templates\affiliate\include\home.html:9
+msgid "Loading..."
+msgstr "กำลังโหลด"
+
+#: .\templates\affiliate\include\header.html:21
+msgid "Logout"
+msgstr "ออกจากระบบ"
+
+#: .\templates\affiliate\include\home.html:4
+msgid "Welcome to Affiliate"
+msgstr ""
+
+#: .\templates\affiliate\include\home.html:7
+msgid "Copy"
+msgstr ""
+
+#: .\templates\affiliate\include\login.html:64
+#: .\templates\affiliate\include\new-user.html:4
+#: .\templates\affiliate\include\new-user.html:33
+msgid "Register"
+msgstr "ลงทะเบียน"
+
+#: .\templates\affiliate\include\login.html:65
+#: .\templates\affiliate\include\login.html:73
+#: .\templates\affiliate\include\login.html:82
+msgid "Login"
+msgstr "เข้าสู่ระบบ"
+
+#: .\templates\affiliate\include\login.html:75
+#: .\templates\affiliate\include\new-user.html:6
+msgid "Username"
+msgstr "ชิ่อผู้ใช้"
+
+#: .\templates\affiliate\include\login.html:79
+#: .\templates\affiliate\include\new-user.html:10
+msgid "Password"
+msgstr "รหัสผ่าน"
+
+#: .\templates\affiliate\include\new-user.html:14
+msgid "Bank"
+msgstr "ธนาคาร"
+
+#: .\templates\affiliate\include\new-user.html:18
+msgid "Bank Account No."
+msgstr "เลขบีญชีธนาคาร"
+
+#: .\templates\affiliate\include\new-user.html:26
+msgid "Phone No."
+msgstr "เบอร์โทรศัพท์"
+
+#: .\templates\affiliate\include\new-user.html:30
+msgid "Captcha"
+msgstr "รหัสสุ่ม"

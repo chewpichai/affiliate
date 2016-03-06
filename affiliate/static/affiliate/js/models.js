@@ -89,7 +89,19 @@
   app.models.User = BaseModel.extend({
     idAttributemodel: 'username'
   });
-  app.models.CommissionDetail = BaseModel.extend({});
+  app.models.CommissionDetail = BaseModel.extend({
+    getFormatted: function(value) {
+      if (value < 0)
+        return '<span class="blue">' + Math.abs(value) + '</span>';
+      return '<span class="red">' + value + '</span>';
+    },
+    getLastWinlossDisplay: function() {
+      return this.getFormatted(this.get('last_winloss'));
+    },
+    getWinlossDisplay: function() {
+      return this.getFormatted(this.get('winloss'));
+    }
+  });
 
   var BaseCollection = Backbone.Collection.extend({
     parse: function(response) {
@@ -112,6 +124,6 @@
       model: app.models.CommissionDetail,
       url: data['commission-details']
     });
-    app.customers = new app.collections.CommissionDetails();
+    app.commissionDetails = new app.collections.CommissionDetails();
   });
 })(jQuery, Backbone, _, app);

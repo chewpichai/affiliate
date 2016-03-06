@@ -41,5 +41,5 @@ class CommissionDetailSerializer(serializers.ModelSerializer):
   def get_links(self, obj):
     request = self.context['request']
     return {
-      'self': reverse('commissiondetail', kwargs={'pk': obj.pk}, request=request),
+      'self': reverse('commissiondetail-detail', kwargs={'pk': obj.pk}, request=request),
     }

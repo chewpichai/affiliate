@@ -1,0 +1,30 @@
+{% load i18n %}
+<script type="text/html" id="commission-list-template">
+  <div class="container">
+    <h1>{% trans 'Your Commissions' %}</h1>
+    <% if (commissionDetails !== null) { %>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover table-commission">
+          <thead>
+            <tr>
+              <th>{% trans 'Date' %}</th>
+              <th>{% trans 'Num Coustomers' %}</th>
+              <th>{% trans 'Commission' %}</th>
+            </tr>
+          </thead>
+          <tbody>
+          <% _.each(commissionDetails.models, function(commission) { %>
+            <tr>
+              <td><%- commission.get('date') %></td>
+              <td class="text-center"><%- commission.get('num_customers') %></td>
+              <td class="text-right"><%- commission.get('comm') %></td>
+            </tr>
+          <% }); %>
+          </tbody>
+        </table>
+      </div>
+      <% } else { %>
+        <div class="loading">{% trans 'Loading...' %}</div>
+      <% } %>
+  </div>
+</script>

@@ -1,0 +1,12 @@
+{% load i18n %}
+<script type="text/html" id="home-template">
+  <div class="container">
+    <h1>{% trans 'Welcome to Affiliate' %}</h1>
+    <% if (me !== null) { %>
+      <p id="user-shareable-link"><%- me.shareable_link %></p>
+      <button type="button" class="btn btn-default btn-copy">{% trans 'Copy' %}</button>
+    <% } else { %>
+      <div class="loading">{% trans 'Loading...' %}</div>
+    <% } %>
+  </div>
+</script>
