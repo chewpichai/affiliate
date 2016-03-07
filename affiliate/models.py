@@ -41,7 +41,7 @@ class User(AbstractUser):
     import string;
     choices = string.digits + string.letters
     refid = ''.join([random.SystemRandom().choice(choices)
-                    for i in range(15)])
+                     for i in range(15)])
     try:
       cls.objects.get(refid=refid)
       return cls.gen_refid()
@@ -49,7 +49,7 @@ class User(AbstractUser):
       return refid
 
   def get_shareable_link(self):
-    return 'http://www.fifa555.com/?ref=%s' % self.refid
+    return 'http://www.fifa555.com/?bonus=%s' % self.refid
 
   def get_date_range(self):
     usernames = self.customers.values_list('username', flat=True)
